@@ -15,20 +15,21 @@
         app:title="@string/author_name"
         app:titleTextColor="@android:color/white" />
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/author_image_width_land"
-                android:layout_height="@dimen/author_image_height_land"
-                android:src="@drawable/author" />
+        <ImageView
+            android:layout_width="@dimen/author_image_width_land"
+            android:layout_height="@dimen/author_image_height_land"
+            android:src="@drawable/author" />
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,10 +122,8 @@
                         android:src="@drawable/linkedin" />
                 </LinearLayout>
             </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
-
-    </ScrollView>
-
+    </LinearLayout>
 
 </LinearLayout>
