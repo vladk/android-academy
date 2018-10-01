@@ -25,7 +25,7 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:id="@+id/scroll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -40,15 +40,13 @@
                 android:layout_height="@dimen/author_image_height_land"
                 android:src="@drawable/author" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/left_margin"
                 android:orientation="vertical">
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/icon_size"
                     android:layout_marginTop="@dimen/default_margin"
@@ -102,8 +100,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/send_message" />
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/icon_size"
                     android:layout_marginTop="@dimen/default_margin"
