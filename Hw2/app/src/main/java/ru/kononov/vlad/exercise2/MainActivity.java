@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = ((EditText)findViewById(R.id.message_text)).getText().toString();
+                String message = ((EditText) findViewById(R.id.message_text)).getText().toString();
 
-                if(message.isEmpty()){
+                if (message.isEmpty()) {
                     Toast.makeText(getBaseContext(), getResources().getString(R.string.message_text_empty), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -34,10 +34,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_EMAIL, "test@test.ru");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Hello");
                 intent.putExtra(Intent.EXTRA_TEXT, message);
-                if(intent.resolveActivity(getPackageManager()) != null){
+                if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                }
-                else{
+                } else {
                     Toast.makeText(getBaseContext(), getResources().getString(R.string.no_email_client_error), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         addImageUrl(R.id.img_linkedin, "https://linkedin.com");
     }
 
-    void addImageUrl(int resId, final String url){
+    void addImageUrl(int resId, final String url) {
         ImageView img = findViewById(resId);
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
