@@ -23,7 +23,8 @@
 
         <ImageView
             android:layout_width="@dimen/author_image_width_land"
-            android:layout_height="@dimen/author_image_height_land"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             android:src="@drawable/author" />
 
         <ScrollView
