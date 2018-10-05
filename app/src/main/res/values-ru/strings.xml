@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Домашнее задание 2</string>
+    <string name="app_name">NY Times</string>
     <string name="author_name">Владислав Кононов</string>
     <string name="author_experience">Citizen-media, back-end envisioneer maximize capture embedded, plug-and-play cross-platform supply-chains relationships real-time, proactive frictionless. Life-hacks communities standards-compliant, cross-platform A-list open-source harness web-readiness global interfaces: granular disintermediate whiteboard users networking schemas transparent integrate applications, integrate data-driven web-readiness web-enabled schemas</string>
     <string name="enter_message_hint">Введите сообщение...</string>

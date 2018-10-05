@@ -22,5 +22,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$jetVersion"
     implementation "androidx.recyclerview:recyclerview:$jetVersion"
+    implementation "androidx.cardview:cardview:$jetVersion"
     implementation 'com.github.bumptech.glide:glide:4.4.0'
 }
