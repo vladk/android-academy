@@ -14,4 +14,5 @@
     <dimen name="news_details_margin">8dp</dimen>
     <dimen name="news_details_title_size">20sp</dimen>
     <dimen name="news_details_image_width">240dp</dimen>
+    <dimen name="news_right_margin">110dp</dimen>
 </resources>
