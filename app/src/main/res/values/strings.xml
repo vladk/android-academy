@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NY Times</string>
+    <string name="author_name">Vladislav Kononov</string>
+    <string name="author_experience">Architectural design. Application development. Responsible for automating development processes. Implementation of complex tasks. Increase the productivity of existing solutions in the company. Database optimization.</string>
+    <string name="enter_message_hint">Enter a message...</string>
+    <string name="author_experience_title">Senior Asp.net developer</string>
+    <string name="no_email_client_error">You need mail client to send email</string>
+    <string name="message_text_empty">Message is empty</string>
+    <string name="send_message">Send message</string>
+</resources>

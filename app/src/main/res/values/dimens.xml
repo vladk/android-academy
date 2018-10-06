@@ -9,4 +9,10 @@
     <dimen name="boder_size">1dp</dimen>
     <dimen name="icon_size">38dp</dimen>
     <dimen name="author_image_width_land">220dp</dimen>
+    <dimen name="news_margin">4dp</dimen>
+    <dimen name="news_image_size">100dp</dimen>
+    <dimen name="news_details_margin">8dp</dimen>
+    <dimen name="news_details_title_size">20sp</dimen>
+    <dimen name="news_details_image_width">240dp</dimen>
+    <dimen name="news_right_margin">110dp</dimen>
 </resources>
