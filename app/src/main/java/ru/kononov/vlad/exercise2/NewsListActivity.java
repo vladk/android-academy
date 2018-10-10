@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.kononov.vlad.exercise2.data.DataUtils;
-import ru.kononov.vlad.exercise2.data.NewsItem;
 
 public class NewsListActivity extends AppCompatActivity {
 
@@ -21,11 +20,7 @@ public class NewsListActivity extends AppCompatActivity {
         final Activity activity = this;
 
         RecyclerView list = findViewById(R.id.recycler);
-        list.setAdapter(new ActorRecyclerAdapter(this, DataUtils.generateNews(), new ActorRecyclerAdapter.OnItemClickListener() {
-            public void onItemClick(NewsItem item) {
-                NewsDetailsActivity.start(activity, item.getId());
-            }
-        }));
+        list.setAdapter(new ActorRecyclerAdapter(this, DataUtils.generateNews(), item -> NewsDetailsActivity.start(activity, item.getId())));
         if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             list.setLayoutManager(new LinearLayoutManager(this));
         } else {

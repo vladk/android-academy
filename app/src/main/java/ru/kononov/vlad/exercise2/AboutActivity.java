@@ -20,26 +20,23 @@ public class AboutActivity extends AppCompatActivity {
 
         Button sendBtn = findViewById(R.id.send_message_btn);
 
-        sendBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = ((EditText) findViewById(R.id.message_text)).getText().toString();
+        sendBtn.setOnClickListener(v -> {
+            String message = ((EditText) findViewById(R.id.message_text)).getText().toString();
 
-                if (message.isEmpty()) {
-                    Toast.makeText(getBaseContext(), getResources().getString(R.string.message_text_empty), Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            if (message.isEmpty()) {
+                Toast.makeText(getBaseContext(), getResources().getString(R.string.message_text_empty), Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"));
-                intent.putExtra(Intent.EXTRA_EMAIL, "test@test.ru");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Hello");
-                intent.putExtra(Intent.EXTRA_TEXT, message);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getBaseContext(), getResources().getString(R.string.no_email_client_error), Toast.LENGTH_SHORT).show();
-                }
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, "test@test.ru");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Hello");
+            intent.putExtra(Intent.EXTRA_TEXT, message);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                Toast.makeText(getBaseContext(), getResources().getString(R.string.no_email_client_error), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -50,14 +47,12 @@ public class AboutActivity extends AppCompatActivity {
 
     void addImageUrl(int resId, final String url) {
         ImageView img = findViewById(resId);
-        img.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
-            }
+        img.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
         });
     }
 }
