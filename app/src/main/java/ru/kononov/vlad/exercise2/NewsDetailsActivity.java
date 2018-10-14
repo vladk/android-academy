@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -21,11 +24,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ru.kononov.vlad.exercise2.data.DataUtils;
 import ru.kononov.vlad.exercise2.data.NewsItem;
 
 public class NewsDetailsActivity extends AppCompatActivity {
     private static final String KEY_NEWS_ID = "KEY_NEWS_ID";
+    private Disposable disposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,8 +42,23 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
         final int id = getIntent().getIntExtra(KEY_NEWS_ID, -1);
 
-        NewsItem item = DataUtils.getNewsItem(id);
+        disposable = Observable.fromCallable(() -> DataUtils.getNewsItem(id))
+                .delay(2, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(item -> showNewsItem(item));
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
+    }
+
+
+    void showNewsItem(NewsItem item){
+        ProgressBar progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
