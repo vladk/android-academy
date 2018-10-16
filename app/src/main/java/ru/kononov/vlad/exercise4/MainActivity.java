@@ -16,10 +16,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         stepLeft = new LeftLeg(1, this);
         stepRight = new RightLeg(2, this);
-        new Thread(stepLeft).start();
-        new Thread(stepRight).start();
 
         stepTextView = findViewById(R.id.step_id);
+
+        new Thread(stepLeft).start();
+        new Thread(stepRight).start();
     }
 
     void updateTextView(String text) {
@@ -52,7 +53,10 @@ class TextUpdateRunnable implements Runnable {
 
     @Override
     public void run() {
-        textView.get().setText(text);
+        TextView tv = textView.get();
+        if(tv != null){
+            textView.get().setText(text);
+        }
     }
 }
 
@@ -74,6 +78,13 @@ abstract class RunnableLeg implements Runnable {
         }
     }
 
+    void updateTextView(String text){
+        MainActivity activity = this.mainActivity.get();
+        if(activity != null) {
+            activity.updateTextView(text);
+        }
+    }
+
     void stop() {
         isRunning = false;
     }
@@ -89,7 +100,7 @@ class LeftLeg extends RunnableLeg {
         while (isRunning) {
             if (prevStep == stepId) continue;
             System.out.println("Left step");
-            this.mainActivity.get().updateTextView("Left step");
+            updateTextView("Left step");
             setStep(stepId);
         }
     }
@@ -105,7 +116,7 @@ class RightLeg extends RunnableLeg {
         while (isRunning) {
             if (prevStep == stepId) continue;
             System.out.println("Right step");
-            this.mainActivity.get().updateTextView("Right step");
+            updateTextView("Right step");
             setStep(stepId);
         }
     }
