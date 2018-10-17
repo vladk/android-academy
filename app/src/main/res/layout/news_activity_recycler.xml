@@ -3,14 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:scaleX="0.10"
-        android:scaleY="0.10"
-        android:visibility="visible" />
+    <include layout="@layout/common_progressbar"/>
+    <include layout="@layout/common_error"/>
+    <include layout="@layout/common_nodata"/>
 
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"

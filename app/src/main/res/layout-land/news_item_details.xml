@@ -3,14 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:scaleX="0.10"
-        android:scaleY="0.10"
-        android:visibility="visible" />
+
+    <include layout="@layout/common_progressbar"/>
+    <include layout="@layout/common_error"/>
+    <include layout="@layout/common_nodata"/>
+
     <ImageView
         android:id="@+id/news_image"
         android:layout_width="@dimen/news_details_image_width"

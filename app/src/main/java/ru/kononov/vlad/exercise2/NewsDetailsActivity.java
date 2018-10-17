@@ -31,9 +31,8 @@ import io.reactivex.schedulers.Schedulers;
 import ru.kononov.vlad.exercise2.data.DataUtils;
 import ru.kononov.vlad.exercise2.data.NewsItem;
 
-public class NewsDetailsActivity extends AppCompatActivity {
+public class NewsDetailsActivity extends BaseActivity {
     private static final String KEY_NEWS_ID = "KEY_NEWS_ID";
-    private Disposable disposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,23 +41,16 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
         final int id = getIntent().getIntExtra(KEY_NEWS_ID, -1);
 
-        disposable = Observable.fromCallable(() -> DataUtils.getNewsItem(id))
-                .delay(2, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(item -> showNewsItem(item));
+        disposables.add(
+                DataUtils.getNewsItem(id)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe(__ -> setState(PAGE_LOADING))
+                        .doAfterSuccess(__ -> setState(PAGE_LOADED))
+                        .subscribe(this::showNewsItem, error -> setState(PAGE_ERROR))
+        );
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        disposable.dispose();
-    }
-
-
-    void showNewsItem(NewsItem item){
-        ProgressBar progressBar = findViewById(R.id.progress_bar);
-        progressBar.setVisibility(View.GONE);
+    void showNewsItem(NewsItem item) {
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);

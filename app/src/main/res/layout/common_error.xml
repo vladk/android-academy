@@ -1,0 +1,6 @@
+<TextView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_error"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/default_margin"
+    android:text="@string/failed_loading_content" />
