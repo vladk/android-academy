@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 public class DataUtils {
 
-    public static NewsItem getNewsItem(int id){
-        List<NewsItem> news = generateNews();
-        for (NewsItem curItem : news) {
-            if (curItem.getId() == id)
-                return curItem;
-        }
-        return null;
+    public static Single<NewsItem> getNewsItem(int id) {
+        return generateNews()
+                .flatMap(Observable::fromIterable)
+                .filter(item -> item.getId() == id)
+                .firstOrError();
     }
 
-    public static List<NewsItem> generateNews() {
+    public static Observable<List<NewsItem>> generateNews() {
         final Category darwinAwards = new Category(1, "Darwin Awards");
         final Category criminal = new Category(2, "Criminal");
         final Category animals = new Category(3, "Animals");
@@ -142,7 +145,9 @@ public class DataUtils {
                         + "were Goodnight Girl and Love Is All Around.\""
         ));
 
-        return news;
+        return Observable.fromArray(news)
+                .delay(2, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io());
     }
 
     private static Date createDate(int year, int month, int date, int hrs, int min) {

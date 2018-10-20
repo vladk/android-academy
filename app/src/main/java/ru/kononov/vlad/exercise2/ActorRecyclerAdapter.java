@@ -63,24 +63,22 @@ public class ActorRecyclerAdapter extends RecyclerView.Adapter<ActorRecyclerAdap
     class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
         private final TextView nameView;
-        private final TextView catetoryView;
+        private final TextView categoryView;
         private final TextView previewTextView;
         private final TextView publishDateView;
 
         ViewHolder(@NonNull View itemView, @Nullable final OnItemClickListener listener) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    if (listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(actors.get(position));
-                    }
+            itemView.setOnClickListener((view) -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(actors.get(position));
                 }
             });
 
             imageView = itemView.findViewById(R.id.news_image);
             nameView = itemView.findViewById(R.id.news_title);
-            catetoryView = itemView.findViewById(R.id.news_category);
+            categoryView = itemView.findViewById(R.id.news_category);
             previewTextView = itemView.findViewById(R.id.news_preview_text);
             publishDateView = itemView.findViewById(R.id.news_publish_date);
         }
@@ -88,7 +86,7 @@ public class ActorRecyclerAdapter extends RecyclerView.Adapter<ActorRecyclerAdap
         void bind(NewsItem newsItem) {
             imageLoader.load(newsItem.getImageUrl()).into(imageView);
             nameView.setText(newsItem.getTitle());
-            catetoryView.setText(newsItem.getCategory().getName());
+            categoryView.setText(newsItem.getCategory().getName());
             previewTextView.setText(newsItem.getPreviewText());
 
             String formattedDate = DateUtils.getRelativeDateTimeString(publishDateView.getContext(),

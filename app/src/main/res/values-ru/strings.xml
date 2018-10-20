@@ -7,4 +7,6 @@
     <string name="no_email_client_error">Нет приложения для отправки почты</string>
     <string name="message_text_empty">Напишите сообщение</string>
     <string name="send_message">Отправить сообщение</string>
+	<string name="no_content_loaded">Данные для отображения отстуствуют</string>
+    <string name="failed_loading_content">Возникла ошибка при загрузке данных</string>
 </resources>
