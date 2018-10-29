@@ -4,26 +4,20 @@ import java.util.Date;
 
 public class NewsItem {
 
-    private final int id;
     private final String title;
     private final String imageUrl;
-    private final Category category;
+    private final String category;
     private final Date publishDate;
     private final String previewText;
-    private final String fullText;
+    private final String url;
 
-    public NewsItem(int id, String title, String imageUrl, Category category, Date publishDate, String previewText, String fullText) {
-        this.id = id;
+    public NewsItem(String title, String imageUrl, String category, Date publishDate, String previewText, String url) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.category = category;
         this.publishDate = publishDate;
         this.previewText = previewText;
-        this.fullText = fullText;
-    }
-
-    public int getId() {
-        return id;
+        this.url = url;
     }
 
     public String getTitle() {
@@ -34,7 +28,7 @@ public class NewsItem {
         return imageUrl;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
@@ -46,7 +40,7 @@ public class NewsItem {
         return previewText;
     }
 
-    public String getFullText() {
-        return fullText;
+    public String getUrl() {
+        return url;
     }
 }

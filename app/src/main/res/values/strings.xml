@@ -9,4 +9,6 @@
     <string name="send_message">Send message</string>
     <string name="no_content_loaded">No content loaded</string>
     <string name="failed_loading_content">Failed loading content</string>
+    <string name="retry">Retry</string>
+    <string name="app_title">NY Times</string>
 </resources>
