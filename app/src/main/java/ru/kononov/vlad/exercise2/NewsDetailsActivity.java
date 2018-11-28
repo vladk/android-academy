@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,51 +29,20 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ru.kononov.vlad.exercise2.data.DataUtils;
 import ru.kononov.vlad.exercise2.data.NewsItem;
 
 public class NewsDetailsActivity extends BaseActivity {
-    private static final String KEY_NEWS_ID = "KEY_NEWS_ID";
+    private static final String KEY_NEWS_URL = "KEY_NEWS_URL";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_item_details);
 
-        final int id = getIntent().getIntExtra(KEY_NEWS_ID, -1);
+        final String url = getIntent().getStringExtra(KEY_NEWS_URL);
 
-        disposables.add(
-                DataUtils.getNewsItem(id)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSubscribe(__ -> setState(PAGE_LOADING))
-                        .doAfterSuccess(__ -> setState(PAGE_LOADED))
-                        .subscribe(this::showNewsItem, error -> setState(PAGE_ERROR))
-        );
-    }
-
-    void showNewsItem(NewsItem item) {
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setTitle(item.getCategory().getName());
-        }
-
-        setTextValue(R.id.news_title, item.getTitle());
-        setTextValue(R.id.news_full_text, item.getFullText());
-
-        String formattedDate = DateUtils.getRelativeDateTimeString(getBaseContext(),
-                item.getPublishDate().getTime(), DateUtils.MINUTE_IN_MILLIS,
-                DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_TIME).toString();
-
-        setTextValue(R.id.news_publish_date, formattedDate);
-
-        ImageView imageView = findViewById(R.id.news_image);
-        Glide.with(this).load(item.getImageUrl()).into(imageView);
-    }
-
-    void setTextValue(int id, String value) {
-        TextView view = findViewById(id);
-        view.setText(value);
+        WebView webView = findViewById(R.id.newsDetailsWebview);
+        webView.loadUrl(url);
     }
 
     @Override
@@ -81,9 +51,9 @@ public class NewsDetailsActivity extends BaseActivity {
         return true;
     }
 
-    public static void start(Activity activity, int id) {
+    public static void start(Activity activity, String url) {
         Intent intent = new Intent(activity, NewsDetailsActivity.class);
-        intent.putExtra(KEY_NEWS_ID, id);
+        intent.putExtra(KEY_NEWS_URL, url);
         activity.startActivity(intent);
     }
 }

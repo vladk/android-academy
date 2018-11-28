@@ -86,7 +86,10 @@ public class ActorRecyclerAdapter extends RecyclerView.Adapter<ActorRecyclerAdap
         void bind(NewsItem newsItem) {
             imageLoader.load(newsItem.getImageUrl()).into(imageView);
             nameView.setText(newsItem.getTitle());
-            categoryView.setText(newsItem.getCategory().getName());
+
+            String category = newsItem.getCategory();
+            categoryView.setText(category);
+            categoryView.setVisibility(category == null || category.isEmpty() ? View.GONE : View.VISIBLE);
             previewTextView.setText(newsItem.getPreviewText());
 
             String formattedDate = DateUtils.getRelativeDateTimeString(publishDateView.getContext(),

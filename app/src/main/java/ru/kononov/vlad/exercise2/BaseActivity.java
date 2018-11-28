@@ -27,6 +27,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void setState(@PageStates int stateId){
         setViewVisibility(R.id.common_progress_bar, stateId == PAGE_LOADING);
+        setViewVisibility(R.id.retry_btn, stateId == PAGE_ERROR);
         setViewVisibility(R.id.common_error, stateId == PAGE_ERROR);
         setViewVisibility(R.id.common_nodata, stateId == PAGE_NODATA);
     }
