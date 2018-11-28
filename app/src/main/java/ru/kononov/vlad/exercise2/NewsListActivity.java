@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.kononov.vlad.exercise2.data.NewsItem;
+import ru.kononov.vlad.exercise2.data.NewsItemConverter;
 import ru.kononov.vlad.exercise2.data.network.RestApi;
 import ru.kononov.vlad.exercise2.data.network.dto.MultimediaDTO;
 
@@ -55,21 +56,7 @@ public class NewsListActivity extends BaseActivity {
                         .news()
                         .topStories(category)
                         .flatMapIterable(list -> list.results)
-                        .map(item -> {
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-                            String url = null;
-                            if (item.multimedia != null && !item.multimedia.isEmpty()) {
-                                MultimediaDTO media = item.multimedia.get(0);
-                                if (media != null) {
-                                    url = media.url;
-                                }
-                            }
-
-                            if (url == null) {
-                                url = "https://via.placeholder.com/200x200";
-                            }
-                            return new NewsItem(item.title, url, item.subsection, format.parse(item.publishedDate), item.theAbstract, item.url);
-                        })
+                        .map(item -> NewsItemConverter.fromNetwork(item))
                         .toList()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
